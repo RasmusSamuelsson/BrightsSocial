@@ -1,13 +1,14 @@
 package com.example.BrightsSocial;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Controller
@@ -26,35 +27,69 @@ public class UserController {
 
     @PostMapping("/")
     public String login (HttpSession session, @RequestParam String username, @RequestParam String password) {
+        for (User user : userRepository.users) {
+            if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
+                session.setAttribute("username", username);
+                session.setAttribute("password", password);
+                session.setAttribute("user", user);
+                return "redirect:/loginTemp";            // change the name of the template
+        }
 
-        if (username.equals(rightUser) && password.equals(rightPassword)) {
-            session.setAttribute("username", username);
-            session.setAttribute("password", password);
-            return "logintemporary";            // change the name of the template
         }
         return "/";
 
     }
     @GetMapping("/login")
-    public String login2 (HttpSession session) {
+    public String login2 (HttpSession session, Model model) {
         String username = (String)session.getAttribute("username");
         String password = (String)session.getAttribute("password");
+        String user = (String)session.getAttribute("user");
+
+
         if (username != null && password != null) {
-            return "logintemporary";
+            return "redirect:/loginTemp";
         }
-        return "redirect:/";
+
+        return "redirect:/login";
+    }
+
+   @GetMapping("/loginTemp")
+    public String name (HttpSession session, Model model) {
+        List<User> users = userRepository.getUsers();
+      /* String username = (String)session.getAttribute("username");
+        for (User user : users) {
+            if(username.equals(user.getUsername())){
+                users.remove(user);
+            }
+        }*/                 // Remove own user
+
+        model.addAttribute("users", users);
+        return "logintemporary";
     }
 
     @GetMapping ("/register")
-    public String registerReturn () {
+    public String registerReturn (Model model) {
+        model.addAttribute("user", new User());
         return "register";
     }
     @PostMapping("/register")
-    public String registerUser (@ModelAttribute Model model, User user) {
+    public String registerUser (@Valid @ModelAttribute User user,BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "register";
+        }
         model.addAttribute("user", user);
+
         userRepository.addUser(user);
         System.out.println(user);
-        return "logintemporary";
+        System.out.println(userRepository.getUsers());
+        return "redirect:/loginTemp";
     }
+
+ @GetMapping("/profile/{username}")
+    public String userProfile (Model model, @PathVariable String username){
+        User user = userRepository.getUser(username);
+        model.addAttribute("user", user);
+        return "userProfile";
+ }
 
 }
