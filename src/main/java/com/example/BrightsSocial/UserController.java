@@ -42,8 +42,9 @@ public class UserController {
     @PostMapping("/")
     public String login (HttpSession session, @RequestParam String username, @RequestParam String password) {
         for (User user : userRepository.users) {
-            if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
-                session.setAttribute("username", username);
+            if (username.equals(user.getUsername().toLowerCase()) && password.equals(user.getPassword())) {
+                String cap = username.substring(0, 1).toUpperCase() + username.substring(1);
+                session.setAttribute("username", cap);
                 session.setAttribute("password", password);
                 session.setAttribute("loggedIn", Boolean.TRUE);
                 session.setAttribute("user", user);

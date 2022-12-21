@@ -16,8 +16,8 @@ public class MessageRepository {
 
     public MessageRepository(){
         LocalDateTime localDatetime = LocalDateTime.now();
-        Message message = new Message("Hej Allihop", "hej2", localDatetime);
-        Message message2 = new Message("Hej Kalle", "hej3", localDatetime);
+        Message message = new Message("Hej allihop", "Rasmus", localDatetime);
+        Message message2 = new Message("Hej Rasmus", "Christian", localDatetime);
         messages.add(message);
         messages.add(message2);
 
