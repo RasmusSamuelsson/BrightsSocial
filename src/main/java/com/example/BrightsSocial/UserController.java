@@ -82,7 +82,7 @@ public class UserController {
         userRepository.addUser(user);
         System.out.println(user);
         System.out.println(userRepository.getUsers());
-        return "redirect:/loginTemp";
+        return "redirect:/";
     }
 
  @GetMapping("/profile/{username}")
@@ -90,6 +90,20 @@ public class UserController {
         User user = userRepository.getUser(username);
         model.addAttribute("user", user);
         return "userProfile";
+ }
+ @GetMapping("/editProfile/{username}")
+ public String editProfile( Model model, @PathVariable String username ) {
+     User user = userRepository.getUser(username);
+     model.addAttribute("user", user);
+
+
+
+     //String user =(String) session.getAttribute("user");
+
+    // model.addAttribute("user", user);
+
+
+        return "editProfile";
  }
 
 }

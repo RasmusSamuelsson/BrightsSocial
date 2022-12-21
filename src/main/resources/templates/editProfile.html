@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 th:text="${user.firstName}"></h1>
+<form action ="editProfile" method="Post" >
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">First name</label>
+      <input type="text" name ="firstName"  class="form-control" id="inputEmail4" placeholder="First name">
+
+    </div>
+
+
+
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Last name</label>
+      <input type="text" name="lastName"  class="form-control" id="inputPassword4" placeholder="Last name">
+
+    </div>
+
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input type="text" name="city"  class="form-control" id="inputCity">
+
+    </div>
+
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">presentation</label>
+      <input type="text" name="presentation"  class="form-control" id="inputUser">
+
+    </div>
+
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">Password</label>
+      <input type="password" name="password"  class="form-control" id="inputPass">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <label class="form-check-label" for="gridCheck">
+        Check me out
+      </label>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Sign up</button>
+</form>
+
+</body>
+</html>

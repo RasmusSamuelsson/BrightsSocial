@@ -21,6 +21,7 @@ public class User {
     @Size (min = 8, message = "Password must be more than 8 characters")
     private String password;
     private String repeatPassword;
+    private String presentation;
 
     /*@AssertTrue(message="Must agree to terms and conditions")
     private boolean terms;*/
@@ -87,6 +88,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPresentation() {
+        return presentation;
+    }
+
+    public void setPresentation(String presentation) {
+        this.presentation = presentation;
     }
 
     @Override

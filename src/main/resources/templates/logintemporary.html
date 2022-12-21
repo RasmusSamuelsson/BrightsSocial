@@ -8,7 +8,10 @@
 <h1>Welcome to Brights Social</h1>
 
 <div><p th:text="${session.username}"></p> </div>
-<div><p th:text="${session.user.firstName}"></p>  <p th:text="${session.user.lastName}"></p> <p th:text="${session.user.city}"></p>  </div>
+<div><p th:text="${session.user.firstName}"></p>  <p th:text="${session.user.lastName}"></p> <p th:text="${session.user.city}"></p>
+    <textarea th:text="${session.user.presentation}" ></textarea>
+    <a th:href="'/editProfile/' + ${session.username}"> edit profile </a>
+</div>
 
 <table>
     <tr>
@@ -21,8 +24,12 @@
         <td th:text="${us.firstName}"></td>
         <td th:text="${us.lastName}"></td>
         <td th:text="${us.city}"></td>
+
     </tr>
 </table>
-
+<script>
+    function update(){
+    }
+</script>
 </body>
 </html>
