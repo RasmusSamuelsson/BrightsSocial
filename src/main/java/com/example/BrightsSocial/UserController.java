@@ -25,7 +25,7 @@ public class UserController {
     public String home (HttpSession session, Model model){
         boolean loggedIn = Boolean.TRUE == session.getAttribute("loggedIn");
         if(loggedIn){
-            return "redirect:/loginTemp";
+            return "redirect:/myprofile";
         }
         return "home";
 
@@ -39,7 +39,7 @@ public class UserController {
                 session.setAttribute("password", password);
                 session.setAttribute("loggedIn", Boolean.TRUE);
                 session.setAttribute("user", user);
-                return "redirect:/loginTemp";            // change the name of the template
+                return "redirect:/myprofile";            // change the name of the template
         }
 
         }
@@ -54,13 +54,13 @@ public class UserController {
 
 
         if (username != null && password != null) {
-            return "redirect:/loginTemp";
+            return "redirect:/myprofile";
         }
 
         return "redirect:/login";
     }
 
-   @GetMapping("/loginTemp")
+   @GetMapping("/myprofile")
     public String name (HttpSession session, Model model) {
        List<User> allUsers = userRepository.getUsers();
        List<User> usersToShow = new ArrayList<>();
@@ -73,7 +73,7 @@ public class UserController {
 
 
        model.addAttribute("users", usersToShow);
-       return "logintemporary";
+       return "myprofile";
 
     }
 
@@ -94,7 +94,7 @@ public class UserController {
         userRepository.addUser(user);
         System.out.println(user);
         System.out.println(userRepository.getUsers());
-        return "redirect:/loginTemp";
+        return "redirect:/myprofile";
     }
 
  @GetMapping("/profile/{username}")
@@ -103,23 +103,28 @@ public class UserController {
         model.addAttribute("user", user);
         return "userProfile";
  }
- @GetMapping("/editProfile/{username}")
- public String editProfile( Model model, @PathVariable String username ) {
-     User user = userRepository.getUser(username);
-     model.addAttribute("user", user);
-
-
-
-     //String user =(String) session.getAttribute("user");
-
-    // model.addAttribute("user", user);
-
-
+ @GetMapping("/editprofile")
+ public String editProfile(HttpSession session ) {
         return "editProfile";
  }
 
+ @PostMapping("/editprofile")
+ public String saveEditProfile(HttpSession session, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String city, @RequestParam String presentation, @RequestParam String password){
+        User user = (User)session.getAttribute("user");
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setCity(city);
+        user.setPresentation(presentation);
+        user.setPassword(password);
+        return "redirect:/myprofile";
+ }
+
+
+
+
+
     @GetMapping("/logout")
-    public String logout(HttpSession session, HttpServletResponse res){
+    public String logout(HttpSession session){
         session.invalidate();
         return  "redirect:/";
     }

@@ -9,16 +9,14 @@
 
 <div><p th:text="${session.username}"></p> </div>
 <div><p th:text="${session.user.firstName}"></p>  <p th:text="${session.user.lastName}"></p> <p th:text="${session.user.city}"></p>
-    <textarea th:text="${session.user.presentation}" ></textarea>
-    <a th:href="'/editProfile/' + ${session.username}"> edit profile </a>
+    <p th:text="${session.user.presentation} ?: 'Lägg till din presentation i edit profile'" > </p>
+    <a href="/editprofile"> edit profile </a>
     <a href="/logout">Logout</a>
 </div>
 
 <table>
     <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Price</th>
+       <th>Other users</th>
     </tr>
     <tr th:each="us : ${users}">
         <td><a th:href="'/profile/' + ${us.username}" th:text="${us.username}"></a></td>

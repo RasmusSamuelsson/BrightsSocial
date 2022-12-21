@@ -5,12 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<h1 th:text="${user.firstName}"></h1>
-<form action ="editProfile" method="Post" >
+<h1 th:text="${session.user.firstName}"></h1>
+<form action ="/editprofile" method="post">
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputEmail4">First name</label>
-      <input type="text" name ="firstName"  class="form-control" id="inputEmail4" placeholder="First name">
+      <label for="firstName">First name</label>
+      <input type="text" name="firstName" id="firstName" class="form-control" th:value="${session.user.firstName}">
 
     </div>
 
@@ -18,7 +18,7 @@
 
     <div class="form-group col-md-6">
       <label for="inputPassword4">Last name</label>
-      <input type="text" name="lastName"  class="form-control" id="inputPassword4" placeholder="Last name">
+      <input type="text" name="lastName"  class="form-control" id="inputPassword4" th:value="${session.user.lastName}">
 
     </div>
 
@@ -26,7 +26,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">City</label>
-      <input type="text" name="city"  class="form-control" id="inputCity">
+      <input type="text" name="city"  class="form-control" id="inputCity" th:value="${session.user.city}">
 
     </div>
 
@@ -34,7 +34,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">presentation</label>
-      <input type="text" name="presentation"  class="form-control" id="inputUser">
+      <input type="text" name="presentation"  class="form-control" id="inputPresentation" th:value="${session.user.presentation}">
 
     </div>
 
@@ -42,7 +42,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">Password</label>
-      <input type="password" name="password"  class="form-control" id="inputPass">
+      <input type="password" name="password"  class="form-control" id="inputPass" th:value="${session.user.password}">
     </div>
   </div>
   <div class="form-group">
@@ -53,7 +53,7 @@
       </label>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Sign up</button>
+  <button type="submit" class="btn btn-primary">Apply changes</button>
 </form>
 
 </body>
