@@ -11,6 +11,7 @@
 <div><p th:text="${session.user.firstName}"></p>  <p th:text="${session.user.lastName}"></p> <p th:text="${session.user.city}"></p>
     <textarea th:text="${session.user.presentation}" ></textarea>
     <a th:href="'/editProfile/' + ${session.username}"> edit profile </a>
+    <a href="/logout">Logout</a>
 </div>
 
 <table>
