@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:replace="base::layout(~{::section})">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+<section class="banner d-flex justify-content-center align-items-center">
 <form action ="/" method="post">
     <div class="form-group">
         <label for="exampleInputEmail1">Username</label>
-        </p><input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        </p><input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter User Name">
         <small id="emailHelp" class="form-text text-muted">We'll never share your username with anyone else.</small>
     </div>
     <div class="form-group">
@@ -20,9 +21,10 @@
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    <a href="/register">Registrera dig här</a>
+    <button type="submit" class="btn btn-dark">Submit</button>
+    <a href="/register" class="btn btn-dark">Register</a>
 </form>
+</section>
 
 
 </body>

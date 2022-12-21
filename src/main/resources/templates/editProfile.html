@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:replace="base::layout(~{::section})">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<section>
 <h1 th:text="${session.user.firstName}"></h1>
 <form action ="/editprofile" method="post">
   <div class="form-row">
@@ -55,6 +56,7 @@
   </div>
   <button type="submit" class="btn btn-primary">Apply changes</button>
 </form>
+</section>
 
 </body>
 </html>

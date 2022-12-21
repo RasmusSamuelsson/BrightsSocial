@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:replace="base::layout(~{::section})">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<section>
 <h1 th:text="${user.firstName} + 's profil'"></h1>
 <table>
   <tr>
@@ -20,5 +21,6 @@
     <th th:text="${user.city}"></th>
   </tr>
 </table>
+</section>
 </body>
 </html>
