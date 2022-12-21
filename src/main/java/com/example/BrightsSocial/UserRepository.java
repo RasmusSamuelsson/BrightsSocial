@@ -13,9 +13,11 @@ public class UserRepository {
 
 
     public UserRepository() {
-        users.add(new User("kalle", "anka", "stockholm", "hej", "12345678"));
-        users.add(new User("kalle2", "anka2", "göteborg", "hej2", "12345678"));
-        users.add(new User("kalle3", "anka3", "malmö", "hej3", "12345678"));
+        User user = new User("Moutasem", "Abu Hashim", "Stockholm", "Mouta", "12345678");
+        user.setPresentation("Blivande datatekniker som studerar på JAVA WINTER23");
+        users.add(user);
+        users.add(new User("Christian", "Neemé", "Stockholm", "Christian", "12345678"));
+        users.add(new User("Rasmus", "Samuelsson", "Gävle", "Rasmus", "12345678"));
 
 
     }

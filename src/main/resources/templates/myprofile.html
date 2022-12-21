@@ -27,6 +27,23 @@
 
     </tr>
 </table>
+
+<table>
+    <tr>
+        <th>Feed</th>
+    </tr>
+    <tr th:each="message : ${messages}">
+        <td><a th:href="'/profile/' + ${message.sender}" th:text="${message.sender}"></a></td>
+        <td th:text="${message.messageBody}"></td>
+        <td th:text="${message.time}"></td>
+    </tr>
+</table>
+<form action ="/myprofile" method="post">
+    <textarea name="message" ></textarea>
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>
+
+
 <script>
     function update(){
     }
