@@ -9,7 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -18,6 +22,10 @@ public class UserController {
 
     @Autowired
     public UserRepository userRepository;
+
+    @Autowired
+    public MessageRepository messageRepository;
+
     String rightUser = "admin";
     String rightPassword = "123456";
 
@@ -63,6 +71,7 @@ public class UserController {
    @GetMapping("/myprofile")
     public String name (HttpSession session, Model model) {
        List<User> allUsers = userRepository.getUsers();
+       List<Message> allMessages = messageRepository.getMessages();
        List<User> usersToShow = new ArrayList<>();
        String username = (String)session.getAttribute("username");
        for (User user : allUsers) {
@@ -73,7 +82,22 @@ public class UserController {
 
 
        model.addAttribute("users", usersToShow);
+       model.addAttribute("messages", allMessages);
        return "myprofile";
+
+    }
+
+    @PostMapping("/myprofile")
+    public String sendMessage(HttpSession session, @RequestParam String message){
+        String name = (String)session.getAttribute("username");
+        LocalDateTime time = LocalDateTime.now();
+        messageRepository.add(new Message(message, name, time));
+
+
+        //messageRepository.add(message2);
+
+
+        return "redirect:/myprofile";
 
     }
 
@@ -98,9 +122,12 @@ public class UserController {
     }
 
  @GetMapping("/profile/{username}")
-    public String userProfile (Model model, @PathVariable String username){
+    public String userProfile (Model model, @PathVariable String username, HttpSession session){
         User user = userRepository.getUser(username);
         model.addAttribute("user", user);
+        if(session.getAttribute("username").equals(username)){
+            return "redirect:/myprofile";
+        }
         return "userProfile";
  }
  @GetMapping("/editprofile")
