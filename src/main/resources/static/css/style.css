@@ -9,6 +9,7 @@ textarea {
   width: 500px;
   height: 100px;
    resize: none;
+   opacity: 0.5;
 }
 
 .bg-primary{
@@ -68,4 +69,30 @@ margin-bottom: 10px
 
 .time{
 color:black;
-font-size:10px; }
+font-size:10px;
+margin-top: -3px;
+margin-bottom: -5px;
+}
+
+.profileCard{
+margin-top: 10px;
+}
+
+.welcome{
+display: flex;
+    justify-content: center;
+}
+
+.card{
+background-color: lightsteelblue;
+
+}
+
+.card-body{
+background-color: white;
+}
+
+.customBtn{
+background-color: lightsteelblue;
+color: black;
+}

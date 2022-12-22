@@ -20,7 +20,10 @@ public class UserRepository {
         users.add(new User("Rasmus", "Samuelsson", "Gävle", "Rasmus", "12345678"));
         users.add(new User("Maryam", "Saddiqa", "Simrishamn", "Maryam", "12345678"));
         users.add(new User("Bilal", "Ejaz", "Simrishamn", "Bil", "12345678"));
-
+        users.get(1).setPresentation("Blivande datatekniker som studerar på JAVA WINTER23");
+        users.get(2).setPresentation("Blivande datatekniker som studerar på JAVA WINTER23");
+        users.get(3).setPresentation("Blivande datatekniker som studerar på JAVA WINTER23");
+        users.get(4).setPresentation("Blivande datatekniker som studerar på JAVA WINTER23");
 
     }
 

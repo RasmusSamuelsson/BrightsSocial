@@ -6,21 +6,30 @@
 </head>
 <body>
 <section class="banner">
-    <h1>Welcome to Brights Social</h1>
+    <h1 class="welcome">Welcome to Brights Social</h1>
     <div class="container">
         <div class="row">
             <div class="col">
-                <div><p th:text="${session.username}"></p> </div>
-                <div><p th:text="${session.user.firstName}"></p>  <p th:text="${session.user.lastName}"></p> <p th:text="${session.user.city}"></p>
-                    <p th:text="${session.user.presentation} ?: 'Lägg till din presentation i edit profile'" > </p>
-                    <a href="/editprofile"> edit profile </a>
-                    <a href="/logout">Logout</a>
+                <div class="card profileCard" width="150px">
+                    <img src="../images/profile.png" width="100px" class="card-img-top" alt="...">
+                    <ul class="list-group list-group-flush">
+                        <li th:text="${session.username}" class="list-group-item"></li>
+                        <li th:text="${session.user.firstName} + ' ' + ${session.user.lastName}" class="list-group-item"></li>
+                        <li th:text="${session.user.city}" class="list-group-item"></li>
+                    </ul>
+
+                    <div class="card-body">
+                        <h5 class="card-title biotext">Bio</h5>
+                        <p class="card-text biotext" th:text="${session.user.presentation} ?: 'You can add a bio in the edit profile tab'"></p>
+                    </div>
+
+
                 </div>
             </div>
             <div class="col-6 text-align-center">
-                <form action ="/myprofile" method="post">
+                <form action ="/myprofile" method="post" class="profileCard" >
                     <textarea style="border:1px solid" name="message" ></textarea>
-                    <button type="submit" class="btn btn-primary">Send</button>
+                    <button type="submit" class="btn btn-primary customBtn">Send</button>
                 </form>
                 <h2>Feed</h2>
                 <div th:each="message : ${messages}" class="card customcard" style="width: 500px;">
@@ -39,7 +48,7 @@
             </div>
             <div class="col">
                 <h2>Other users</h2>
-                <div th:each="us : ${users}" class="card" style="width: 18rem;">
+                <div th:each="us : ${users}" class="card customcard" style="width: 18rem;">
                     <div class="card-header">
                         <a th:href="'/profile/' + ${us.username}" th:text="${us.username}"></a>
                     </div>
