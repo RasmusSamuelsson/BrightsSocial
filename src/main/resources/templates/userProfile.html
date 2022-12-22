@@ -5,22 +5,22 @@
     <title>Title</title>
 </head>
 <body>
-<section class="banner">
+<section class="banner col-md-8 offset-md-5"  id="register">
 <h1 th:text="${user.firstName} + 's profil'"></h1>
-<table>
-  <tr>
-    <th>First Name</th>
-    <th th:text="${user.firstName}"></th>
-  </tr>
-  <tr>
-    <th>Last Name</th>
-    <th th:text="${user.lastName}"></th>
-  </tr>
-  <tr>
-    <th>City</th>
-    <th th:text="${user.city}"></th>
-  </tr>
-</table>
+  <div class="card" style="width: 18rem;">
+    <img src="../images/profile.png" height="200px" width="100px" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5><br>
+      <p class="card-text" th:text="${user.presentation}"></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" th:text="'FirstName:       '+${user.firstName}" ></li>
+      <li class="list-group-item" th:text="'LastName:       '+${user.lastName}"></li>
+      <li class="list-group-item" th:text="'City :          '+${user.city}"></li>
+    </ul>
+
+  </div>
+
 </section>
 </body>
 </html>

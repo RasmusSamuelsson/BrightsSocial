@@ -23,7 +23,7 @@ margin-top:20px;
 }
 .welcome{
 padding:20px 0px;
-background-image:linear-gradient(to right,#ffffff 0%,#2c2a30, #000000 100%);
+background-image:linear-gradient(to right,#ffffff 0%, #000000 100%);
 background-size:100%;
 -webkit-background-clip:text;
 -moz-background-clip:text;

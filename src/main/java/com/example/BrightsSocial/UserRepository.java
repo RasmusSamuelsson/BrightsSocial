@@ -18,6 +18,8 @@ public class UserRepository {
         users.add(user);
         users.add(new User("Christian", "Neemé", "Stockholm", "Christian", "12345678"));
         users.add(new User("Rasmus", "Samuelsson", "Gävle", "Rasmus", "12345678"));
+        users.add(new User("Maryam", "Saddiqa", "Simrishamn", "Maryam", "12345678"));
+        users.add(new User("Bilal", "Ejaz", "Simrishamn", "Bil", "12345678"));
 
 
     }
