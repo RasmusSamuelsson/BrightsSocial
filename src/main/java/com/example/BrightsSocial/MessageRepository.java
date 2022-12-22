@@ -28,6 +28,6 @@ public class MessageRepository {
     }
 
     public void add(Message message){
-        messages.add(message);
+        messages.add(0, message);
     }
 }

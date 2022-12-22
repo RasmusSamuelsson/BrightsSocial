@@ -19,19 +19,20 @@
             </div>
             <div class="col-6 text-align-center">
                 <form action ="/myprofile" method="post">
-                    <textarea name="message" ></textarea>
+                    <textarea style="border:1px solid" name="message" ></textarea>
                     <button type="submit" class="btn btn-primary">Send</button>
                 </form>
                 <h2>Feed</h2>
-                <div th:each="message : ${messages}" class="card column-reverse" style="width: 18rem;">
+                <div th:each="message : ${messages}" class="card customcard" style="width: 500px;">
                     <div class="card-header">
-                        <a th:href="'/profile/' + ${message.sender}" th:text="${message.sender}"></a>
+                        <div class="row">
+                            <a th:href="'/profile/' + ${message.sender}" th:text="${message.sender}"></a>
+                            <p class="time" th:text="${message.time}"> </p>
+                        </div>
+
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" th:text="${message.messageBody}"></li>
-                    </ul>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" th:text="${message.time}">></li>
                     </ul>
                 </div>
 
