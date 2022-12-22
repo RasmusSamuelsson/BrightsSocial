@@ -6,42 +6,57 @@
 </head>
 <body>
 <section class="banner">
-<h1>Welcome to Brights Social</h1>
+    <h1>Welcome to Brights Social</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div><p th:text="${session.username}"></p> </div>
+                <div><p th:text="${session.user.firstName}"></p>  <p th:text="${session.user.lastName}"></p> <p th:text="${session.user.city}"></p>
+                    <p th:text="${session.user.presentation} ?: 'Lägg till din presentation i edit profile'" > </p>
+                    <a href="/editprofile"> edit profile </a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+            <div class="col-6 text-align-center">
+                <form action ="/myprofile" method="post">
+                    <textarea name="message" ></textarea>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+                <h2>Feed</h2>
+                <div th:each="message : ${messages}" class="card column-reverse" style="width: 18rem;">
+                    <div class="card-header">
+                        <a th:href="'/profile/' + ${message.sender}" th:text="${message.sender}"></a>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" th:text="${message.messageBody}"></li>
+                    </ul>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" th:text="${message.time}">></li>
+                    </ul>
+                </div>
 
-<div><p th:text="${session.username}"></p> </div>
-<div><p th:text="${session.user.firstName}"></p>  <p th:text="${session.user.lastName}"></p> <p th:text="${session.user.city}"></p>
-    <p th:text="${session.user.presentation} ?: 'Lägg till din presentation i edit profile'" > </p>
-    <a href="/editprofile"> edit profile </a>
-    <a href="/logout">Logout</a>
-</div>
+            </div>
+            <div class="col">
+                <h2>Other users</h2>
+                <div th:each="us : ${users}" class="card" style="width: 18rem;">
+                    <div class="card-header">
+                        <a th:href="'/profile/' + ${us.username}" th:text="${us.username}"></a>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" th:text="${us.firstName} + ' ' + ${us.lastName}"></li>
 
-<table>
-    <tr>
-       <th>Other users</th>
-    </tr>
-    <tr th:each="us : ${users}">
-        <td><a th:href="'/profile/' + ${us.username}" th:text="${us.username}"></a></td>
-        <td th:text="${us.firstName}"></td>
-        <td th:text="${us.lastName}"></td>
-        <td th:text="${us.city}"></td>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    </tr>
-</table>
 
-<table>
-    <tr>
-        <th>Feed</th>
-    </tr>
-    <tr th:each="message : ${messages}">
-        <td><a th:href="'/profile/' + ${message.sender}" th:text="${message.sender}"></a></td>
-        <td th:text="${message.messageBody}"></td>
-        <td th:text="${message.time}"></td>
-    </tr>
-</table>
-<form action ="/myprofile" method="post">
-    <textarea name="message" ></textarea>
-    <button type="submit" class="btn btn-primary">Send</button>
-</form>
+
+
+
+
+
 
 
 <script>
