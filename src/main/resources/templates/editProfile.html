@@ -6,12 +6,12 @@
 </head>
 <body>
 <section class="banner col-md-6 offset-md-3" id="register">
-<h1 th:text="${session.user.firstName}"></h1>
+<h1 th:text="${session.people.firstName}"></h1>
 <form action ="/editprofile" method="post">
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="firstName">First name</label>
-      <input type="text" name="firstName" id="firstName" class="form-control" th:value="${session.user.firstName}">
+      <input type="text" name="firstName" id="firstName" class="form-control" th:value="${session.people.firstName}">
 
     </div>
 
@@ -19,7 +19,7 @@
 
     <div class="form-group col-md-6">
       <label for="inputPassword4">Last name</label>
-      <input type="text" name="lastName"  class="form-control" id="inputPassword4" th:value="${session.user.lastName}">
+      <input type="text" name="lastName"  class="form-control" id="inputPassword4" th:value="${session.people.lastName}">
 
     </div>
 
@@ -27,7 +27,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">City</label>
-      <input type="text" name="city"  class="form-control" id="inputCity" th:value="${session.user.city}">
+      <input type="text" name="city"  class="form-control" id="inputCity" th:value="${session.people.city}">
 
     </div>
 
@@ -35,7 +35,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">presentation</label>
-      <input type="text" name="presentation"  class="form-control" id="inputPresentation" th:value="${session.user.presentation}">
+      <input type="text" name="presentation"  class="form-control" id="inputPresentation" th:value="${session.people.presentation}">
 
     </div>
 
@@ -43,7 +43,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">Password</label>
-      <input type="password" name="password"  class="form-control" id="inputPass" th:value="${session.user.password}">
+      <input type="password" name="password"  class="form-control" id="inputPass" th:value="${session.people.password}">
     </div>
   </div>
   <br>

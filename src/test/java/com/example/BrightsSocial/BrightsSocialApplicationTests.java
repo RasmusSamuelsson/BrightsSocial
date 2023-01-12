@@ -13,12 +13,12 @@ class BrightsSocialApplicationTests {
 
 	@Test
 	public void testUserCreation() {
-		User user = new User("Andreas", "Olsson", "Sthlm", "Andreas", "12345678");
-		Assertions.assertEquals("Andreas", user.getFirstName());
-		Assertions.assertEquals("Andreas", user.getUsername());
-		Assertions.assertEquals("Olsson", user.getLastName());
-		Assertions.assertEquals("Sthlm", user.getCity());
-		Assertions.assertEquals("12345678", user.getPassword());
+		People people = new People("Andreas", "Olsson", "Sthlm", "Andreas", "12345678");
+		Assertions.assertEquals("Andreas", people.getFirstName());
+		Assertions.assertEquals("Andreas", people.getUsername());
+		Assertions.assertEquals("Olsson", people.getLastName());
+		Assertions.assertEquals("Sthlm", people.getCity());
+		Assertions.assertEquals("12345678", people.getPasscode());
 	}
 
 }

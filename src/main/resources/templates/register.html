@@ -7,12 +7,12 @@
 </head>
 <body>
 <section class="banner col-md-6 offset-md-3" id="register">
-<form action ="register" method="post" th:object="${user}">
+<form action ="register" method="post" th:object="${people}">
   <h1 class="registration">Registration Form</h1>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">First name</label>
-      <input type="text" name ="firstName" th:classappend="${#fields.hasErrors('firstName')}?'is-invalid':''" th:value="${user.firstName}" th:field="*{firstName}" class="form-control" id="inputEmail4" placeholder="First name">
+      <input type="text" name ="firstName" th:classappend="${#fields.hasErrors('firstName')}?'is-invalid':''" th:value="${people.firstName}" th:field="*{firstName}" class="form-control" id="inputEmail4" placeholder="First name">
 
       <div th:each="e : ${#fields.errors('firstName')}" th:text="${e}" class="invalid-feedback"></div>
     </div>
@@ -21,7 +21,7 @@
 
     <div class="form-group col-md-6">
       <label for="inputPassword4">Last name</label>
-      <input type="text" name="lastName" th:classappend="${#fields.hasErrors('lastName')}?'is-invalid':''" th:value="${user.lastName}" th:field="*{lastName}" class="form-control" id="inputPassword4" placeholder="Last name">
+      <input type="text" name="lastName" th:classappend="${#fields.hasErrors('lastName')}?'is-invalid':''" th:value="${people.lastName}" th:field="*{lastName}" class="form-control" id="inputPassword4" placeholder="Last name">
       <div th:each="e : ${#fields.errors('lastName')}" th:text="${e}" class="invalid-feedback"></div>
     </div>
 
@@ -29,7 +29,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">City</label>
-      <input type="text" name="city" th:classappend="${#fields.hasErrors('city')}?'is-invalid':''" th:value="${user.city}" th:field="*{city}"  class="form-control" id="inputCity">
+      <input type="text" name="city" th:classappend="${#fields.hasErrors('city')}?'is-invalid':''" th:value="${people.city}" th:field="*{city}"  class="form-control" id="inputCity">
       <div th:each="e : ${#fields.errors('city')}" th:text="${e}" class="invalid-feedback"></div>
     </div>
 
@@ -37,7 +37,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">Username</label>
-      <input type="text" name="username" th:classappend="${#fields.hasErrors('username')}?'is-invalid':''" th:value="${user.username}" th:field="*{username}" class="form-control" id="inputUser">
+      <input type="text" name="username" th:classappend="${#fields.hasErrors('username')}?'is-invalid':''" th:value="${people.username}" th:field="*{username}" class="form-control" id="inputUser">
       <div th:each="e : ${#fields.errors('username')}" th:text="${e}" class="invalid-feedback"></div>
     </div>
 
@@ -45,7 +45,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">Password</label>
-      <input type="password" name="password" th:classappend="${#fields.hasErrors('password')}?'is-invalid':''" th:value="${user.password}" th:field="*{password}" class="form-control" id="inputPass">
+      <input type="password" name="password" th:classappend="${#fields.hasErrors('password')}?'is-invalid':''" th:value="${people.password}" th:field="*{password}" class="form-control" id="inputPass">
       <div th:each="e : ${#fields.errors('password')}" th:text="${e}" class="invalid-feedback"></div>
     </div>
   </div>

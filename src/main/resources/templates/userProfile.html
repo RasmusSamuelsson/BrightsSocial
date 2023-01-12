@@ -6,18 +6,18 @@
 </head>
 <body>
 <section class="banner col-md-8 offset-md-5"  id="register">
-<h1 th:text="${user.firstName} + ' profil'"></h1>
+<h1 th:text="${people.firstName} + ' profil'"></h1>
   <div class="card" style="width: 18rem;">
     <img src="../images/profile.png" height="200px" width="100px" class="card-img-top" alt="...">
     <div class="card-body">
       <br>
       <h5 class="card-title biotext">Bio</h5>
-      <p class="card-text biotext" th:text="${user.presentation}"></p>
+      <p class="card-text biotext" th:text="${people.presentation}"></p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" th:text="'First name:       '+${user.firstName}" ></li>
-      <li class="list-group-item" th:text="'Last name:       '+${user.lastName}"></li>
-      <li class="list-group-item" th:text="'City :          '+${user.city}"></li>
+      <li class="list-group-item" th:text="'First name:       '+${people.firstName}" ></li>
+      <li class="list-group-item" th:text="'Last name:       '+${people.lastName}"></li>
+      <li class="list-group-item" th:text="'City :          '+${people.city}"></li>
     </ul>
 
   </div>

@@ -14,13 +14,13 @@
                     <img src="../images/profile.png" width="100px" class="card-img-top" alt="...">
                     <ul class="list-group list-group-flush">
                         <li th:text="${session.username}" class="list-group-item"></li>
-                        <li th:text="${session.user.firstName} + ' ' + ${session.user.lastName}" class="list-group-item"></li>
-                        <li th:text="${session.user.city}" class="list-group-item"></li>
+                        <li th:text="${session.people.firstName} + ' ' + ${session.people.lastName}" class="list-group-item"></li>
+                        <li th:text="${session.people.city}" class="list-group-item"></li>
                     </ul>
 
                     <div class="card-body">
                         <h5 class="card-title biotext">Bio</h5>
-                        <p class="card-text biotext" th:text="${session.user.presentation} ?: 'You can add a bio in the edit profile tab'"></p>
+                        <p class="card-text biotext" th:text="${session.people.presentation} ?: 'You can add a bio in the edit profile tab'"></p>
                     </div>
 
 

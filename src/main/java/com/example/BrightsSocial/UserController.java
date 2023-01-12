@@ -1,6 +1,5 @@
 package com.example.BrightsSocial;
 
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -41,13 +37,14 @@ public class UserController {
 
     @PostMapping("/")
     public String login(HttpSession session, @RequestParam String username, @RequestParam String password) {
-        for (User user : userRepository.users) {
-            if (username.equals(user.getUsername().toLowerCase()) && password.equals(user.getPassword())) {
+       List<People> allPeople = (List<People>) userRepository.findAll();
+        for (People people : allPeople) {
+            if (username.equals(people.getUsername().toLowerCase()) && password.equals(people.getPasscode())) {
                 String cap = username.substring(0, 1).toUpperCase() + username.substring(1);
                 session.setAttribute("username", cap);
                 session.setAttribute("password", password);
                 session.setAttribute("loggedIn", Boolean.TRUE);
-                session.setAttribute("user", user);
+                session.setAttribute("user", people);
                 return "redirect:/myprofile";            // change the name of the template
             }
 
@@ -72,13 +69,13 @@ public class UserController {
 
     @GetMapping("/myprofile")
     public String name(HttpSession session, Model model) {
-        List<User> allUsers = userRepository.getUsers();
+        List<People> allPeople = (List<People>) userRepository.findAll();
         List<Message> allMessages = messageRepository.getMessages();
-        List<User> usersToShow = new ArrayList<>();
+        List<People> usersToShow = new ArrayList<>();
         String username = (String) session.getAttribute("username");
-        for (User user : allUsers) {
-            if (!user.getUsername().equals(username)) {
-                usersToShow.add(user);
+        for (People people : allPeople) {
+            if (!people.getUsername().equals(username)) {
+                usersToShow.add(people);
             }
         }
 
@@ -102,29 +99,28 @@ public class UserController {
 
     @GetMapping("/register")
     public String registerReturn(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new People());
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpSession session, Model model) {
+    public String registerUser(@Valid @ModelAttribute People people, BindingResult bindingResult, HttpSession session, Model model) {
         if (bindingResult.hasErrors()) {
             return "register";
         }
-        model.addAttribute("user", user);
-        session.setAttribute("user", user);
-        session.setAttribute("username", user.getUsername());
+        model.addAttribute("user", people);
+        session.setAttribute("user", people);
+        session.setAttribute("username", people.getUsername());
         session.setAttribute("loggedIn", Boolean.TRUE);
-        userRepository.addUser(user);
-        System.out.println(user);
-        System.out.println(userRepository.getUsers());
+        userRepository.save(people);
+        System.out.println(people);
         return "redirect:/myprofile";
     }
 
     @GetMapping("/profile/{username}")
     public String userProfile(Model model, @PathVariable String username, HttpSession session) {
-        User user = userRepository.getUser(username);
-        model.addAttribute("user", user);
+        People people = userRepository.findByUsername(username);
+        model.addAttribute("user", people);
         if (session.getAttribute("username").equals(username)) {
             return "redirect:/myprofile";
         }
@@ -138,12 +134,12 @@ public class UserController {
 
     @PostMapping("/editprofile")
     public String saveEditProfile(HttpSession session, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String city, @RequestParam String presentation, @RequestParam String password) {
-        User user = (User) session.getAttribute("user");
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setCity(city);
-        user.setPresentation(presentation);
-        user.setPassword(password);
+        People people = (People) session.getAttribute("user");
+        people.setFirstName(firstName);
+        people.setLastName(lastName);
+        people.setCity(city);
+        people.setPresentation(presentation);
+        people.setPasscode(password);
         return "redirect:/myprofile";
     }
 
