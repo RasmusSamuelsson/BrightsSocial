@@ -38,13 +38,14 @@ public class UserController {
     @PostMapping("/")
     public String login(HttpSession session, @RequestParam String username, @RequestParam String password) {
        List<People> allPeople = (List<People>) userRepository.findAll();
+        System.out.println(allPeople);
         for (People people : allPeople) {
             if (username.equals(people.getUsername().toLowerCase()) && password.equals(people.getPasscode())) {
                 String cap = username.substring(0, 1).toUpperCase() + username.substring(1);
                 session.setAttribute("username", cap);
                 session.setAttribute("password", password);
                 session.setAttribute("loggedIn", Boolean.TRUE);
-                session.setAttribute("user", people);
+                session.setAttribute("people", people);
                 return "redirect:/myprofile";            // change the name of the template
             }
 
