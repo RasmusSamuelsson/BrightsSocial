@@ -45,8 +45,8 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">Password</label>
-      <input type="password" name="password" th:classappend="${#fields.hasErrors('password')}?'is-invalid':''" th:value="${people.password}" th:field="*{password}" class="form-control" id="inputPass">
-      <div th:each="e : ${#fields.errors('password')}" th:text="${e}" class="invalid-feedback"></div>
+      <input type="password" name="passcode" th:classappend="${#fields.hasErrors('passcode')}?'is-invalid':''" th:value="${people.passcode}" th:field="*{passcode}" class="form-control" id="inputPass">
+      <div th:each="e : ${#fields.errors('passcode')}" th:text="${e}" class="invalid-feedback"></div>
     </div>
   </div>
   <br>

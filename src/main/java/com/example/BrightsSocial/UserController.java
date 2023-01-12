@@ -100,7 +100,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String registerReturn(Model model) {
-        model.addAttribute("user", new People());
+        model.addAttribute("people", new People());
         return "register";
     }
 
@@ -109,8 +109,8 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "register";
         }
-        model.addAttribute("user", people);
-        session.setAttribute("user", people);
+        model.addAttribute("people", people);
+        session.setAttribute("people", people);
         session.setAttribute("username", people.getUsername());
         session.setAttribute("loggedIn", Boolean.TRUE);
         userRepository.save(people);
@@ -121,7 +121,7 @@ public class UserController {
     @GetMapping("/profile/{username}")
     public String userProfile(Model model, @PathVariable String username, HttpSession session) {
         People people = userRepository.findByUsername(username);
-        model.addAttribute("user", people);
+        model.addAttribute("people", people);
         if (session.getAttribute("username").equals(username)) {
             return "redirect:/myprofile";
         }
@@ -135,7 +135,7 @@ public class UserController {
 
     @PostMapping("/editprofile")
     public String saveEditProfile(HttpSession session, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String city, @RequestParam String presentation, @RequestParam String password) {
-        People people = (People) session.getAttribute("user");
+        People people = (People) session.getAttribute("people");
         people.setFirstName(firstName);
         people.setLastName(lastName);
         people.setCity(city);
