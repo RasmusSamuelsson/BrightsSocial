@@ -190,17 +190,7 @@ public class PeopleController {
         return "myprofile";
     }
 
-    @PostMapping("/editMessage")
-    public String editMessage(@ModelAttribute Message message) {
-    LocalDateTime time = LocalDateTime.now();
-    message.setMessageBody(message.getMessageBody());
-    message.setTime(time);
-    message.setId(message.getId());
 
-    System.out.println(message);
-    messageService.saveMessage(message);
-    return "redirect:/myprofile";
-    }
 
 
     @GetMapping("/logout")
