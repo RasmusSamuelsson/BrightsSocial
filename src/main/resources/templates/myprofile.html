@@ -27,8 +27,9 @@
                 </div>
             </div>
             <div class="col-6 text-align-center">
-                <form action ="/myprofile" method="post" class="profileCard" >
-                    <textarea style="border:1px solid" name="message" ></textarea>
+                <form action ="/myprofile" method="post" th:object="${message}" class="profileCard" >
+                    <textarea style="border:1px solid" th:field="*{messageBody}" ></textarea>
+                    <input th:if="${message.id != null}" type="hidden" th:field="*{id}"/>
                     <button type="submit" class="btn btn-primary customBtn">Send</button>
                 </form>
                 <h2>Feed</h2>
@@ -37,6 +38,9 @@
                         <div class="row">
                             <a th:href="'/profile/' + ${message.sender}" th:text="${message.sender}"></a>
                             <p class="time" th:text="${message.time}"> </p>
+
+                           <button th:if="${message.sender == session.username}" type="delete" class="btn" th:onclick="|window.location.href='/deleteMessage/' + ${message.id}|">Delete</button>
+                           <button th:if="${message.sender == session.username}" type="edit" class="btn" th:onclick="|window.location.href='/editMessage/' + ${message.id}|">Edit</button>
                         </div>
 
                     </div>

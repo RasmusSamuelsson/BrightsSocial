@@ -25,11 +25,26 @@ public class Message{
     public Message() {
     }
 
-    public Message(String messageBody, String sender, LocalDateTime time) {
+    public Message(Long id, String messageBody, String sender, LocalDateTime time) {
+        this.id = id;
         this.messageBody = messageBody;
         this.sender = sender;
         this.time = time;
     }
+
+    public Message( String messageBody, String sender, LocalDateTime time) {
+        this.messageBody = messageBody;
+        this.sender = sender;
+        this.time = time;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+  /*  public void setId(long id) {
+        this.id = id;
+    }*/
 
     public String getMessageBody() {
         return messageBody;

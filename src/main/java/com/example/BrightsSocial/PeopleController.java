@@ -72,6 +72,7 @@ public class PeopleController {
     public String name(HttpSession session, Model model) {
         List<People> allPeople = peopleService.getAllPeople();
         List<Message> allMessages = messageService.getAllMessages();
+        System.out.println(allMessages);
         List<People> usersToShow = new ArrayList<>();
         String username = (String) session.getAttribute("username");
         for (People people : allPeople) {
@@ -80,7 +81,7 @@ public class PeopleController {
             }
         }
 
-
+        model.addAttribute("message", new Message());
         model.addAttribute("users", usersToShow);
         model.addAttribute("messages", allMessages);
         return "myprofile";
@@ -88,10 +89,13 @@ public class PeopleController {
     }
 
     @PostMapping("/myprofile")
-    public String sendMessage(HttpSession session, @RequestParam String message) {
+    public String sendMessage(HttpSession session,@ModelAttribute Message message) {
         String name = (String) session.getAttribute("username");
+
         LocalDateTime time = LocalDateTime.now();
-        messageService.saveMessage(new Message(message, name, time));
+        Message m = new Message( message.getId(), message.getMessageBody(),name,time);
+        messageService.saveMessage(m);
+
 
 
         return "redirect:/myprofile";
@@ -140,6 +144,23 @@ public class PeopleController {
         people.setCity(city);
         people.setPresentation(presentation);
         people.setPasscode(password);
+        return "redirect:/myprofile";
+    }
+
+    @GetMapping("/deleteMessage/{id}")
+    public String doStuffMethod(@PathVariable Long id) {
+
+        messageService.deleteMessage(id);
+        System.out.println("Success");
+        return "redirect:/myprofile";
+    }
+
+    @GetMapping("/editMessage/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        model.addAttribute("message", messageService.getMessageById(id));
+        //Message message = messageService.getMessageById(id);
+        //messageService.saveMessage(message);
+        System.out.println("Success");
         return "redirect:/myprofile";
     }
 

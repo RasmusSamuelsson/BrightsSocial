@@ -24,5 +24,15 @@ public class MessageService {
         messageRepository.save(message);
     }
 
+    void deleteMessage(Long id){
+        Message message = getMessageById(id);
+        messageRepository.delete(message);
+    }
+
+    Message getMessageById(long id){
+        Message message = messageRepository.findById(id).get();
+        return message;
+    }
+
 
 }
