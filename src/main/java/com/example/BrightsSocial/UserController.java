@@ -71,7 +71,7 @@ public class UserController {
     @GetMapping("/myprofile")
     public String name(HttpSession session, Model model) {
         List<People> allPeople = (List<People>) userRepository.findAll();
-        List<Message> allMessages = messageRepository.getMessages();
+        List<Message> allMessages = (List)messageRepository.findAll();
         List<People> usersToShow = new ArrayList<>();
         String username = (String) session.getAttribute("username");
         for (People people : allPeople) {
@@ -91,7 +91,7 @@ public class UserController {
     public String sendMessage(HttpSession session, @RequestParam String message) {
         String name = (String) session.getAttribute("username");
         LocalDateTime time = LocalDateTime.now();
-        messageRepository.add(new Message(message, name, time));
+        messageRepository.save(new Message(message, name, time));
 
 
         return "redirect:/myprofile";

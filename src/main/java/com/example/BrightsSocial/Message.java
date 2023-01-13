@@ -1,18 +1,29 @@
 package com.example.BrightsSocial;
 
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Message {
+@Entity
+public class Message{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "messagebody")
     private String messageBody;
     private String sender;
-    private LocalTime now;
+   // private LocalTime now;
 
     private LocalDateTime time;
-    private String date;
+   // private String date;
+
+    public Message() {
+    }
 
     public Message(String messageBody, String sender, LocalDateTime time) {
         this.messageBody = messageBody;
@@ -32,9 +43,9 @@ public class Message {
         return sender;
     }
 
-    public String getDate(){
+   /* public String getDate(){
         return date;
-    }
+    }*/
 
     public void setSender(String sender) {
         this.sender = sender;
