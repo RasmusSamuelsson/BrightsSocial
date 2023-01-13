@@ -7,7 +7,8 @@
 <body>
 <form action="/editMessage" method="post" th:object="${message}" class="profileCard" >
   <textarea style="border:1px solid" th:field="*{messageBody}" ></textarea>
-  <input th:if="${message.id != null}" th:field="*{id}"/>
+  <input th:if="${message.id != null}" type="hidden" th:field="*{sender}"/>
+  <input th:if="${message.id != null}"  type="hidden" th:field="*{id}"/>
   <button type="submit" class="btn btn-primary customBtn">Send</button>
 </form>
 

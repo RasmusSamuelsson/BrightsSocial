@@ -19,6 +19,8 @@ public class Message{
     private String sender;
    // private LocalTime now;
 
+
+
     private LocalDateTime time;
    // private String date;
 
@@ -42,7 +44,11 @@ public class Message{
         return id;
     }
 
-  /*  public void setId(long id) {
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    /*  public void setId(long id) {
         this.id = id;
     }*/
 
@@ -52,6 +58,9 @@ public class Message{
 
     public void setMessageBody(String messageBody) {
         this.messageBody = messageBody;
+    }
+    public void setTime(LocalDateTime time) {
+        this.time = time;
     }
 
     public String getSender() {

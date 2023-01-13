@@ -3,6 +3,7 @@ package com.example.BrightsSocial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,5 +24,16 @@ public class PeopleService {
     People findUser(String username){
         People people = peopleRepository.findByUsername(username);
         return people;
+    }
+
+    List<People> getOtherPeople(String username){
+        List<People> usersToShow = new ArrayList<>();
+        List<People> allPeople = getAllPeople();
+        for (People people : allPeople) {
+            if (!people.getUsername().equals(username)) {
+                usersToShow.add(people);
+            }
+        }
+        return usersToShow;
     }
 }
