@@ -25,6 +25,8 @@ public class PeopleController {
 
     String rightUser = "admin";
     String rightPassword = "123456";
+    @Autowired
+    private PeopleRepository peopleRepository;
 
     @GetMapping("/")
     public String home(HttpSession session, Model model) {
@@ -72,15 +74,15 @@ public class PeopleController {
     public String name(HttpSession session, Model model) {
         List<People> allPeople = peopleService.getAllPeople();
         List<Message> allMessages = messageService.getAllMessages();
-        System.out.println(allMessages);
         List<People> usersToShow = new ArrayList<>();
         String username = (String) session.getAttribute("username");
+        People loggedInPeople = peopleService.findUser(username);
         for (People people : allPeople) {
             if (!people.getUsername().equals(username)) {
                 usersToShow.add(people);
             }
         }
-
+        model.addAttribute("people", loggedInPeople);
         model.addAttribute("message", new Message());
         model.addAttribute("users", usersToShow);
         model.addAttribute("messages", allMessages);
@@ -93,8 +95,8 @@ public class PeopleController {
         String name = (String) session.getAttribute("username");
 
         LocalDateTime time = LocalDateTime.now();
-        Message m = new Message( message.getId(), message.getMessageBody(),name,time);
-        messageService.saveMessage(m);
+            Message m = new Message( message.getId(), message.getMessageBody(),name,time);
+            messageService.saveMessage(m);
 
 
 
@@ -132,18 +134,24 @@ public class PeopleController {
     }
 
     @GetMapping("/editprofile")
-    public String editProfile(HttpSession session) {
+    public String editProfile(HttpSession session, Model model) {
+        String username = (String) session.getAttribute("username");
+        People getPeople = peopleRepository.findByUsername(username);
+        model.addAttribute("people",getPeople);
+
         return "editProfile";
     }
 
     @PostMapping("/editprofile")
-    public String saveEditProfile(HttpSession session, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String city, @RequestParam String presentation, @RequestParam String password) {
-        People people = (People) session.getAttribute("people");
-        people.setFirstName(firstName);
-        people.setLastName(lastName);
-        people.setCity(city);
-        people.setPresentation(presentation);
-        people.setPasscode(password);
+    public String saveEditProfile(HttpSession session, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String city, @RequestParam String presentation, @RequestParam String passcode) {
+        String username = (String) session.getAttribute("username");
+        People getPeople = peopleRepository.findByUsername(username);
+        getPeople.setFirstName(firstName);
+        getPeople.setLastName(lastName);
+        getPeople.setCity(city);
+        getPeople.setPresentation(presentation);
+        getPeople.setPasscode(passcode);
+        peopleService.savePeople(getPeople);
         return "redirect:/myprofile";
     }
 
@@ -151,17 +159,33 @@ public class PeopleController {
     public String doStuffMethod(@PathVariable Long id) {
 
         messageService.deleteMessage(id);
-        System.out.println("Success");
         return "redirect:/myprofile";
     }
 
     @GetMapping("/editMessage/{id}")
-    public String edit(@PathVariable Long id, Model model) {
+    public String edit(@PathVariable Long id, Model model,HttpSession session) {
+        Message m = messageService.getMessageById(id);
+        String username = peopleService.findUser((String)session.getAttribute("username")).getUsername();
         model.addAttribute("message", messageService.getMessageById(id));
-        //Message message = messageService.getMessageById(id);
-        //messageService.saveMessage(message);
-        System.out.println("Success");
-        return "redirect:/myprofile";
+        model.addAttribute("people", peopleService.findUser((String)session.getAttribute("username")));
+
+        if(m.getSender().equals(username)){
+            System.out.println("Success");
+        }else{
+            return "redirect:/myprofile";
+        }
+
+
+        return "editMessage";
+    }
+
+    @PostMapping("/editMessage")
+    public String editMessage(@ModelAttribute Message message) {
+        LocalDateTime time = LocalDateTime.now();
+    //Message m = new Message(message.getId(), message.getMessageBody(),message.getSender(),time );
+    message.setMessageBody(message.getMessageBody());
+    messageService.saveMessage(message);
+    return "redirect:/myprofile";
     }
 
 

@@ -19,7 +19,7 @@ public class People {
     private String firstName;
     @Column (name = "lastname")
     @NotEmpty(message = "Last name should not be empty")
-    @Size (max = 15, message = "Name should not be more than 15 characters")
+    @Size (max = 50, message = "Name should not be more than 15 characters")
     private String lastName;
    /* private int age;*/
     private String city;
@@ -42,6 +42,14 @@ public class People {
         this.city = city;
         this.username = username;
         this.passcode = password;
+    }
+    public People(long id, String firstName, String lastName, String city, String username, String password) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.city = city;
+        this.username = username;
+        this.passcode = password;
 
     }
     public People(String username, String password) {
@@ -50,6 +58,10 @@ public class People {
     }
 
     public People() {
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getFirstName() {
