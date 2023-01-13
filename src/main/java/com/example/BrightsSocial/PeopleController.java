@@ -14,13 +14,14 @@ import java.util.List;
 
 
 @Controller
-public class UserController {
+public class PeopleController {
 
     @Autowired
-    public UserRepository userRepository;
+    PeopleService peopleService;
 
     @Autowired
-    public MessageRepository messageRepository;
+    MessageService messageService;
+
 
     String rightUser = "admin";
     String rightPassword = "123456";
@@ -37,7 +38,7 @@ public class UserController {
 
     @PostMapping("/")
     public String login(HttpSession session, @RequestParam String username, @RequestParam String password) {
-       List<People> allPeople = (List<People>) userRepository.findAll();
+       List<People> allPeople = peopleService.getAllPeople();
         System.out.println(allPeople);
         for (People people : allPeople) {
             if (username.equals(people.getUsername().toLowerCase()) && password.equals(people.getPasscode())) {
@@ -46,9 +47,8 @@ public class UserController {
                 session.setAttribute("password", password);
                 session.setAttribute("loggedIn", Boolean.TRUE);
                 session.setAttribute("people", people);
-                return "redirect:/myprofile";            // change the name of the template
+                return "redirect:/myprofile";
             }
-
         }
         return "redirect:/";
 
@@ -70,8 +70,8 @@ public class UserController {
 
     @GetMapping("/myprofile")
     public String name(HttpSession session, Model model) {
-        List<People> allPeople = (List<People>) userRepository.findAll();
-        List<Message> allMessages = (List)messageRepository.findAll();
+        List<People> allPeople = peopleService.getAllPeople();
+        List<Message> allMessages = messageService.getAllMessages();
         List<People> usersToShow = new ArrayList<>();
         String username = (String) session.getAttribute("username");
         for (People people : allPeople) {
@@ -91,7 +91,7 @@ public class UserController {
     public String sendMessage(HttpSession session, @RequestParam String message) {
         String name = (String) session.getAttribute("username");
         LocalDateTime time = LocalDateTime.now();
-        messageRepository.save(new Message(message, name, time));
+        messageService.saveMessage(new Message(message, name, time));
 
 
         return "redirect:/myprofile";
@@ -113,14 +113,13 @@ public class UserController {
         session.setAttribute("people", people);
         session.setAttribute("username", people.getUsername());
         session.setAttribute("loggedIn", Boolean.TRUE);
-        userRepository.save(people);
-        System.out.println(people);
+        peopleService.savePeople(people);
         return "redirect:/myprofile";
     }
 
     @GetMapping("/profile/{username}")
     public String userProfile(Model model, @PathVariable String username, HttpSession session) {
-        People people = userRepository.findByUsername(username);
+        People people = peopleService.findUser(username);
         model.addAttribute("people", people);
         if (session.getAttribute("username").equals(username)) {
             return "redirect:/myprofile";
