@@ -7,9 +7,8 @@ import java.util.List;
 
 public interface MessageRepository extends CrudRepository<Message, Long> {
 
-    List<Message> findAllOrderByTime();
 
-    @Query(value ="Select * from Message order by Time desc", nativeQuery = true)
+    @Query(value ="select * from message order by time desc", nativeQuery = true)
     List<Message> findAllMessages();
 
 }
