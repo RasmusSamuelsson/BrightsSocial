@@ -27,6 +27,8 @@ public class PeopleController {
     String rightPassword = "123456";
     @Autowired
     private PeopleRepository peopleRepository;
+    @Autowired
+    private MessageRepository messageRepository;
 
     @GetMapping("/")
     public String home(HttpSession session, Model model) {
@@ -90,11 +92,11 @@ public class PeopleController {
     public String sendMessage(HttpSession session,@ModelAttribute Message message) {
         String name = (String) session.getAttribute("username");
 
-        LocalDateTime time = LocalDateTime.now();
-        if(message.getId() ==0){
-            Message m = new Message( message.getId(), message.getMessageBody(),name,time);
-            m.setPeople(peopleService.findUser(name));
-            messageService.saveMessage(m);
+        messageService.saveMessage(message, name);
+       /* if(message.getId() ==0){
+            message = new Message( message.getId(), message.getMessageBody(),name,time);
+            message.setPeople(peopleService.findUser(name));
+            messageService.saveMessage(message);
         }else{
             message.setMessageBody(message.getMessageBody());
             message.setTime(time);
@@ -102,10 +104,7 @@ public class PeopleController {
             message.setSender(message.getSender());
             message.setId(message.getId());
             messageService.saveMessage(message);
-        }
-
-
-
+        }*/
 
         return "redirect:/myprofile";
 

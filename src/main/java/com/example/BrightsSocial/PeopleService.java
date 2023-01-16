@@ -26,6 +26,11 @@ public class PeopleService {
         return people;
     }
 
+    String getUserNameById(long id){
+        String username = getUserNameById(id);
+        return username;
+    }
+
     List<People> getOtherPeople(String username){
         List<People> usersToShow = new ArrayList<>();
         List<People> allPeople = getAllPeople();

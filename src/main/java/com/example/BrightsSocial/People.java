@@ -32,7 +32,7 @@ public class People {
     @NotEmpty(message = "Password must not be empty")
     @Size (min = 8, message = "Password must be more than 8 characters")
     private String passcode;
-    private String repeatPassword;
+
     @Column (length = 500)
     private String presentation;
 
