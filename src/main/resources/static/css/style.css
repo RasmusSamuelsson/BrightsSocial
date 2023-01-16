@@ -96,3 +96,9 @@ background-color: white;
 background-color: lightsteelblue;
 color: black;
 }
+
+.btn-span{
+display: flex;
+    flex-direction: row-reverse;
+}
+
