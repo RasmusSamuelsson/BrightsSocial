@@ -93,10 +93,12 @@ public class PeopleController {
         LocalDateTime time = LocalDateTime.now();
         if(message.getId() ==0){
             Message m = new Message( message.getId(), message.getMessageBody(),name,time);
+            m.setPeople(peopleService.findUser(name));
             messageService.saveMessage(m);
         }else{
             message.setMessageBody(message.getMessageBody());
             message.setTime(time);
+            message.setPeople(peopleService.findUser(name));
             message.setSender(message.getSender());
             message.setId(message.getId());
             messageService.saveMessage(message);
