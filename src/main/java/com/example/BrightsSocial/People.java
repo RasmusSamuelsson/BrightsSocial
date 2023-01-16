@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table (name = "PEOPLE")
 public class People {
@@ -32,6 +35,11 @@ public class People {
     private String repeatPassword;
     @Column (length = 500)
     private String presentation;
+
+    @OneToMany(mappedBy = "people", cascade = CascadeType.ALL)
+    private List<Message> message = new ArrayList<>();
+
+
 
     /*@AssertTrue(message="Must agree to terms and conditions")
     private boolean terms;*/
@@ -118,6 +126,14 @@ public class People {
 
     public void setPresentation(String presentation) {
         this.presentation = presentation;
+    }
+
+    public List<Message> getMessage() {
+        return message;
+    }
+
+    public void setMessage(List<Message> message) {
+        this.message = message;
     }
 
     @Override

@@ -19,6 +19,9 @@ public class Message{
     private String sender;
    // private LocalTime now;
 
+    @ManyToOne
+    private People people;
+
 
 
     private LocalDateTime time;
@@ -70,6 +73,14 @@ public class Message{
    /* public String getDate(){
         return date;
     }*/
+
+    public People getPeople() {
+        return people;
+    }
+
+    public void setPeople(People people) {
+        this.people = people;
+    }
 
     public void setSender(String sender) {
         this.sender = sender;
